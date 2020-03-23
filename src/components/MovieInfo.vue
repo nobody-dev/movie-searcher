@@ -2,7 +2,7 @@
   <div class="movie__info">
     <MovieInfoTitle :movieTitle="movieInfo.title"/>
     <div class="movie__content">
-      <div class="movie__content_left">
+      <div class="movie__left">
         <MovieInfoImage :moviePoster="movieInfo.poster_path"/>
         <MovieInfoRating :movieRating="movieInfo.vote_average"/>
       </div>
@@ -44,6 +44,10 @@
       display: flex;
       width: 600px;
       justify-content: space-around;
+    }
+    &__left {
+      padding: 0 10px;
+      text-align: center;
     }
   }
 </style>
