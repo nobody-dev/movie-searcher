@@ -1,5 +1,9 @@
 <template>
-    <div class="movie__image" :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342${moviePoster}')` }"></div>
+  <img class="movie__image"
+    :src="moviePoster ?
+      `https://image.tmdb.org/t/p/w342${moviePoster}` :
+      `https://thumbs.dfs.ivi.ru/storage15/contents/6/a/a700332f290b273bc1437ae389696c.jpg`"
+    alt="Movie poster">
 </template>
 
 <script>
@@ -12,6 +16,7 @@
 
 <style>
   .movie__image {
+    display: block;
     height: 375px;
     width: 250px;
     background-size: contain;

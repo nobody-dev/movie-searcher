@@ -3,6 +3,7 @@
     <Header/>
     <router-view/>
   </v-app>
+  <!--created by Ivan "Nobody" Kudriavcev-->
 </template>
 
 <script>
@@ -14,3 +15,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  #inspire {
+    background: #f5f5f5;
+  }
+</style>

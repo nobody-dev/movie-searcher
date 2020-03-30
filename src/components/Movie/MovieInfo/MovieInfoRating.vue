@@ -1,5 +1,5 @@
 <template>
-  <span class="movie__rating">Рейтинг: {{movieRating}}</span>
+  <span class="movie__rating">Рейтинг: <strong>{{movieRating}}</strong></span>
 </template>
 
 <script>
@@ -12,6 +12,9 @@
 
 <style lang="scss">
   .movie__rating {
-
+    padding: 0 7px;
+    font-size: 16px;
+    position: relative;
+    top: 3px;
   }
 </style>

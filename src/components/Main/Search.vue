@@ -18,8 +18,19 @@ export default {
       textRequest: '',
     };
   },
+  computed: {
+    getSearchText() {
+      return this.$store.state.searchText;
+    },
+  },
+  mounted() {
+    //When the user returns from the movie page to the main page, insert the search text into the input
+    this.getSearchText ? this.textRequest = this.getSearchText : false;
+  },
   methods: {
     searchMovies() {
+      //Saving user search text
+      this.$store.commit('setPropertyInStore', {key: 'searchText', value: this.textRequest});
       this.$store.dispatch('searchMovies', this.textRequest);
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <span class="movie__title">{{movieTitle}}</span>
+  <h2 class="movie__title">{{movieTitle}}</h2>
 </template>
 
 <script>
@@ -13,7 +13,7 @@
 <style lang="scss">
   .movie__title {
     font-size: 25px;
-    letter-spacing: -1px;
+    letter-spacing: 0px;
     padding: 20px;
   }
 </style>

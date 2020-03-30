@@ -3,9 +3,9 @@
     <v-btn
       :tile="true"
       :block="true"
-      :color="'#007bff'"
+      :color="'#2962FF'"
       :large="true"
-      @click="toHome"
+      @click="toSearch"
     >
       <v-icon left>mdi-arrow-left</v-icon>К общему списку
     </v-btn>
@@ -14,9 +14,16 @@
 
 <script>
   export default {
+    computed: {
+      getSearchText() {
+        return this.$store.state.searchText;
+      }
+    },
     methods: {
-      toHome() {
+      toSearch() {
         this.$router.push('/');
+        //Move to search result page
+        this.$store.dispatch('searchMovies', this.getSearchText)
       },
     },
   };

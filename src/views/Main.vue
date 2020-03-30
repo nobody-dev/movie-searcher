@@ -1,18 +1,18 @@
 <template>
   <div class="main-page">
-    <app-search></app-search>
-    <app-movies></app-movies>
+    <Search/>
+    <Movies/>
   </div>
 </template>
 
 <script>
-import Movies from '../components/Movies.vue';
-import Search from '../components/Search.vue';
+import Movies from '../components/Main/Movies.vue';
+import Search from '../components/Main/Search.vue';
 
 export default {
   components: {
-    appMovies: Movies,
-    appSearch: Search,
+    Movies: Movies,
+    Search: Search,
   },
 };
 </script>

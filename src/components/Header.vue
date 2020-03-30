@@ -62,6 +62,7 @@ export default {
 
 <style scoped>
   .nav-link {
+    font-size: 20px;
     cursor: pointer;
     user-select: none;
   }

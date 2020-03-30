@@ -17,8 +17,15 @@ class MovieSearchResource {
     return fetch(`${this.apiUrl}search/movie?api_key=${this.apiKey}&language=${this.language}&page=${options.page}&query=${payload}`)
   }
 
-  loadMovieInfoRequest(payload) {
-    return fetch(`${this.apiUrl}movie/${payload}?api_key=${this.apiKey}&language=${this.language}`);
+  loadMovieInfoRequest(movieId) {
+    return fetch(`${this.apiUrl}movie/${movieId}?api_key=${this.apiKey}&language=${this.language}`);
+  }
+
+  loadSimilarMoviesRequest(movieId) {
+    const options = {
+      page: 1,
+    };
+    return fetch(`${this.apiUrl}movie/${movieId}/similar?api_key=${this.apiKey}&language=${this.language}&page=${options.page}`)
   }
 }
 

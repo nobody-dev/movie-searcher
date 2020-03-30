@@ -1,76 +1,72 @@
 <template>
-  <div class="favorite">
-    <h1 class="favorite__title">Избранные фильмы:</h1>
-    <!--empty-->
-    <div class="favorite__empty" v-if="!getFavoriteMovies.length">
-      <span class="favorite__empty-text">Вы ничего не добавили</span>
-      <img class ="favorite__empty-img" src="../static/sadsmile.png" alt="Empty :(">
+  <div>
+    <!--loading-->
+    <div class="movies__loading" v-if="isLoading">
+      <v-progress-linear
+        color="rgb(0, 123, 255)"
+        indeterminate
+        rounded
+        height="6"
+      ></v-progress-linear>
     </div>
-    <!--favorite-movies-->
-    <ul class="favorite__movies" v-if="getFavoriteMovies.length">
+    <!--content-->
+    <ul class="movies" v-if="!isLoading">
       <li
-        v-for="movie in getFavoriteMovies"
-        class="favorite__item"
+        v-for="movie in getMovies"
+        class="movies__item"
         :style="{ backgroundImage: movie.poster_path ?
           `url('https://image.tmdb.org/t/p/w342${movie.poster_path}')` :
           `url('https://thumbs.dfs.ivi.ru/storage15/contents/6/a/a700332f290b273bc1437ae389696c.jpg')` }"
         @click="toMovie(movie)"
       >
-        <span class="favorite__name">{{movie.title}}</span>
-        <MovieInfoFavoriteBtn :movieInfo="movie" class="favorite__button"/>
+        <span class="movies__name">{{movie.title}}</span>
+        <MovieInfoFavoriteBtn :movieInfo="movie" class="movies__button"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-  import MovieInfoFavoriteBtn from '../components/Movie/MovieInfo/MovieInfoFavoriteBtn';
+import MovieInfoFavoriteBtn from '../Movie/MovieInfo/MovieInfoFavoriteBtn';
 
-  export default {
-    components: {
-      MovieInfoFavoriteBtn,
+export default {
+  components: { MovieInfoFavoriteBtn },
+  data() {
+    return {
+      isLoading: true,
+    }
+  },
+  computed: {
+    getMovies() {
+      return this.$store.state.movies;
     },
-    computed: {
-      getFavoriteMovies() {
-        return this.$store.state.favoriteMovies;
-      },
+    getSearchText() {
+      return this.$store.state.searchText;
+    }
+  },
+  methods: {
+    toMovie(movie) {
+      this.$router.push(`/movie/${movie.id}`);
     },
-    methods: {
-      toMovie(movie) {
-        this.$router.push(`/movie/${movie.id}`);
-      },
-    },
-  };
+  },
+  async mounted() {
+    //If there is no searchText, the start page just loads, otherwise nothing happens because the user's search result is loading
+    !this.getSearchText ? await this.$store.dispatch('loadPopularMovies') : false;
+    this.isLoading = false;
+  },
+};
 </script>
 
-<style scoped lang="scss">
-  .favorite {
+<style lang="scss" scoped >
+
+  .movies {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    &__title {
-      padding: 20px;
-      font-size: 25px;
-    }
-    &__empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
-      &-img {
-        height: 300px;
-        width: 300px;
-        margin-top: 40px;
-      }
-      &-text {
-        font-size: 22px;
-      }
-    }
-    &__movies {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__loading {
+      padding-top: 50px;
+      width: 70vw;
+      height: 50px;
     }
     &__item {
       position: relative;
@@ -88,7 +84,7 @@
           content: '';
           position: absolute;
         }
-        .favorite__name {
+        .movies__name {
           display: flex;
           transform: translateY(50%);
           bottom: 50%;
@@ -96,7 +92,7 @@
           opacity: 1;
           pointer-events: all;
         }
-        .favorite__button {
+        .movies__button {
           transform: translate(-50%, 50%);
           bottom: 10%;
           transition: all 0.2s ease-out;
