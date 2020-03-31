@@ -1,10 +1,10 @@
 <template>
   <div class="movie__info">
-    <MovieInfoTitle :movieTitle="movieInfo.title"/>
+    <h2 class="movie__title">{{movieInfo.title}}</h2>
     <div class="movie__content">
       <div class="movie__left">
         <MovieInfoImage :moviePoster="movieInfo.poster_path"/>
-        <MovieInfoRating :movieRating="movieInfo.vote_average"/>
+        <span class="movie__rating">Рейтинг: <strong>{{movieInfo.vote_average}}</strong></span>
         <MovieInfoFavoriteBtn :movieInfo="movieInfo"/>
       </div>
       <MovieInfoList :movieInfo="movieInfo"/>
@@ -14,10 +14,8 @@
 </template>
 
 <script>
-  import MovieInfoTitle from './MovieInfo/MovieInfoTitle';
   import MovieInfoImage from './MovieInfo/MovieInfoImage';
   import MovieInfoList from './MovieInfo/MovieInfoList';
-  import MovieInfoRating from './MovieInfo/MovieInfoRating';
   import MovieInfoFavoriteBtn from './MovieInfo/MovieInfoFavoriteBtn';
   import MovieInfoSimilar from './MovieInfo/MovieInfoSimilar';
 
@@ -25,10 +23,8 @@
     components: {
       MovieInfoSimilar,
       MovieInfoFavoriteBtn,
-      MovieInfoRating,
       MovieInfoList,
       MovieInfoImage,
-      MovieInfoTitle
     },
     props: {
       movieInfo: Object,
@@ -38,6 +34,11 @@
 
 <style lang="scss">
   .movie {
+    &__title {
+      font-size: 25px;
+      letter-spacing: 0;
+      padding: 20px;
+    }
     &__info {
       width: 900px;
       background: rgba(#007bff, .1);
@@ -54,6 +55,11 @@
     &__left {
       padding: 0 10px;
       text-align: center;
+    }
+    &__rating {
+      font-size: 16px;
+      position: relative;
+      top: 2px;
     }
   }
 </style>
